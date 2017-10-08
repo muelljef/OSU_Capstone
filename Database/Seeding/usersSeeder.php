@@ -8,14 +8,6 @@ if ($mysqli->connect_error) {
 	die('Connection failed: ' . $mysqli->connect_error);
 }
 
-// retrieve the award types
-$employeeStmt = $mysqli->prepare("SELECT * FROM Awards");
-if(!$employeeStmt->execute()) {
-    error_log('Failed to get award types');
-    exit();
-}
-$awardTypes = $employeeStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
 $employeeStmt = $mysqli->prepare("
     INSERT INTO Employees (fName, lName, hireDate, Email, Password, CreatedOn)
     VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
@@ -54,12 +46,6 @@ for($i = 0; $i < 52; $i++) {
     $type = $i < 50 ? 'user' : 'admin';
     $userTypeStmt->execute();
 }
-
-// Add Awards Given
-    // select users with hireDate before the first of the month, week, etc
-    // Monthly
-    // Weekly
-    // Honorable mention (4 monthly)
 
 $employeeStmt->close();
 $userTypeStmt->close();
