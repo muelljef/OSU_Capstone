@@ -44,6 +44,7 @@ for($i = 0; $i < 52; $i++) {
     $employeeId = $mysqli->insert_id;
     // this should result in two admin users created
     $type = $i < 50 ? 'user' : 'admin';
+    $hireDateStr = $i < 50 ? $hireDateStr : '2015-01-01';
     $userTypeStmt->execute();
 }
 
